@@ -14,10 +14,30 @@ body {
 	border-radius: 25px;
 }
 
+#status {
+	padding-left: 30px;
+	padding-right: 30px;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.status-box {
+	background-color: #ebe1d1;
+	border-radius: 25px;
+	width: 350px;
+	height: 92px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 @media (max-width: 767px) {
 	.container {
 		background-color: #ebe1d1;
 		margin-bottom: 20px;
+	}
+	#status {
+		background-color: #fff;
 	}
 }
 
@@ -26,13 +46,13 @@ body {
 		margin-top: 50px;
 	}
 	.guess-info {
-		margin-top: 20px;
+		margin-top: 10px;
 	}
 }
 
 @media (min-width: 992px) {
 	.guess-info {
-		margin-top: 60px;
+		margin-top: 10px;
 	}
 }
 
@@ -40,16 +60,16 @@ body {
 ================================ */
 
 .guess-form {
-	width: 148px;
+	width: 130px;
 	display: block;
-	margin: 0 auto;
+	margin: 10px auto;
 	padding-bottom: 15px;
 }
 
 .form-control {
 	text-align: center;
 	height: 80px;
-	width: 148px;
+	width: 130px;
 	font-size: 55px;
 	color: #257a7c;
 }
@@ -101,14 +121,24 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
   opacity: 0;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
 .btn {
 	text-transform: lowercase;
 }
 
 .btn-guess {
+	display: block;
+	width: 130px;
 	background-color: #257a7c;
 	color: #fff;
 	border: none;
+	margin-bottom: 4px;
 }
 
 .btn-guess:hover {
@@ -117,14 +147,26 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
 	border: none;
 }
 
-.btn-tryagain {
+.btn-hint {
 	background-color: #f2812b;
 	color: #fff;
 	border: none;
 }
 
-.btn-tryagain:hover {
+.btn-hint:hover {
 	background-color: #f1a76f;
+	color: #fff;
+	border: none;
+}
+
+.btn-tryagain {
+	background-color: #fb422a;
+	color: #fff;
+	border: none;
+}
+
+.btn-tryagain:hover {
+	background-color: #fa8070;
 	color: #fff;
 	border: none;
 }
@@ -140,5 +182,17 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
 @media (max-width: 767px) {
 	.numbertron {
 		max-width: 200px;
+	}
+}
+
+@media (min-width: 768px) {
+	.numbertron {
+		margin-top: 40px;;
+	}
+}
+
+@media (min-width: 992px) {
+	.numbertron {
+		margin-top: 15px;
 	}
 }

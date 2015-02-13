@@ -22,17 +22,20 @@
 				</div>
 				<div class="col-sm-8 guess-info">
 					<h1>Hi! My name is Numbertron.</h1>
-					<h3>Can you guess what number I'm thinking?<br>I'll give you 5 guesses.</h3>
+					<h3>Can you guess what number I'm thinking?</h3>
+					<div class="status-box">
+						<h3 id="status">It's between 1 and 100.<br>I'll give you 5 guesses.</h3>
+					</div>
 					<div class="guess-form">
 						<div class="input input-lg">
-							<input type="text" class="form-control" placeholder="?">
+							<input id="playerGuess" type="text" class="form-control" placeholder="?"/>
 						</div>
 						<div class="guess-button">
-							<button class="btn btn-default btn-guess" type="button">Guess!</button>
-							<button class="btn btn-default btn-tryagain" type="button">Try Again</button>
+							<button class="btn btn-default btn-guess" type="button" onclick="isValidNum()">Guess!</button>
+							<button class="btn btn-default btn-hint" type="button" onclick="giveHint()">Hint</button>
+							<button class="btn btn-default btn-tryagain" type="button" onclick="startOver()">Try Again</button>
 						</div>
 					</div>
-					<p>Because you're so cool, I'll even give you a hint: <br>It's between 1 and 100</p>
 				</div>
 			</div>
 	  </div>
@@ -40,5 +43,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap.min.js"></script>
+		<script src="guess.js"></script>
   </body>
 </html>
