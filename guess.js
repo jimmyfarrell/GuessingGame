@@ -4,6 +4,7 @@ var playerGuess;
 var allGuesses = [];
 var guessesLeft = document.getElementById("guesses-left");
 var statusText = document.getElementById("status");
+var hintText = document.getElementById("hint");
 
 function getRandomNum() {
 	var randomNum = Math.floor((Math.random() * 100) + 1);
@@ -68,6 +69,7 @@ function startGame() {
 function isValidNum() {
 	playerGuess = parseInt(document.getElementById("playerGuess").value);
 	statusText.style.display = "block";
+	hintText.innerHTML = "";
 	document.getElementById("playerGuess").value = '';
 	if (isNaN(playerGuess)) {
 		statusText.innerHTML = "Not a number. Please guess again.";
@@ -86,4 +88,13 @@ function startOver() {
 	guessCount = 5;
 	allGuess = [];
 	statusText.innerHTML = "Remember, you only have 5 guesses.";
+}
+
+function giveHint() {
+	if (guessCount == 5) {
+		hintText.innerHTML = "Nuh uh, you have to at least try to guess.";
+	}
+	else {
+		hintText.innerHTML = answer;
+	}
 }
