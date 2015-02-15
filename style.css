@@ -265,20 +265,35 @@ li {
 	}
 	.all-guesses-box {
 		background-color: #fff;
-		width: 190px;
+		width: 150px;
 	}
 	.guess-output {
 		margin-left: 0;
-		width: 190px;
+		width: 150px;
 	}
 	.guess-input {
 		margin-right: 0;
 	}
 	.guesses-left-box {
-		width: 190px;
+		width: 150px;
 	}
 	.status-box {
-		width: 190px;
+		width: 150px;
+	}
+	.guesses-left {
+		font-size: 14px;
+	}
+	.current-status {
+		font-size: 12px;
+	}
+	.correct-guess {
+		font-size: 16px;
+	}
+	.wrong-guess {
+		font-size: 16px;
+	}
+	li {
+		font-size: 13px;
 	}
 }
 
