@@ -1,26 +1,38 @@
 var guessCount = 5;
 var answer;
-var playerGuess;
-var previousGuess;
+var currentGuess;
 var allGuesses = [];
-var guessList = document.getElementById("guess-list");
-var guessesLeft = document.getElementById("guesses-left");
-var statusText = document.getElementById("current-status");
-var hintText = document.getElementById("hint");
+
+// $(document).ready(listening());
+//
+//
+// function listening() {
+// 	$(".btn-guess").on("click", isValidNum());
+// 	$(".btn-guess").on("keyup", function(e) {
+// 		if (e.keyup == 13) {
+// 			isValidNum();
+// 		});
+// 	$(".btn-hint").on("click", giveHint());
+// 	$(".btn-try-again").on("click", startOver());
+// }
 
 function isValidNum() {
 	var valid = true;
-	playerGuess = document.getElementById("player-guess").value;
-	document.getElementById("player-guess").value = "";
+	currentGuess = $(".player-guess").val();
+	$(".player-guess").val("");
 	for (var i = 0; i < allGuesses.length; i++) {
-		if (playerGuess == allGuesses[i]) {
+		if (currentGuess == allGuesses[i]) {
 			valid = false;
-			statusText.innerHTML = "You already guessed that number.";
+			$(".current-status").text("You already guessed that number");
 		}
 	}
-	if (isNaN(playerGuess)) {
-		valid = false
-		statusText.innerHTML = "Not a number. Please guess again.";
+	if (isNaN(currentGuess) || currentGuess === "") {
+		valid = false;
+		$(".current-status").text("Not a valid number");
+	}
+	if (currentGuess < 0 || currentGuess > 100) {
+		valid = false;
+		$(".current-status").text("I told you, 1-100!");
 	}
 	if (valid) {
 		startGame();
@@ -30,16 +42,15 @@ function isValidNum() {
 function startGame() {
 	guessCount--;
 	if (guessCount == 4) {
-		answer = getRandomNum();
+		answer = Math.floor((Math.random() * 100) + 1);
 	}
-	if (playerGuess == answer) {
-		$("#guess-list").prepend("<li><span style='font-size: 18px; color: #3a2006;'>Guess #" + (5 - guessCount) + ": </span><span style='color: #257a7c;'>" + playerGuess + "</span></li>");
-		statusText.innerHTML = "You won!";
+	updateGuessList();
+	if (currentGuess == answer) {
+		gameWon();
 	}
 	else {
-		$("#guess-list").prepend("<li><span style='font-size: 18px; color: #3a2006;'>Guess #" + (5 - guessCount) + ": </span>" + playerGuess + "</li>");
 		if (guessCount > 0) {
-			allGuesses.push(playerGuess);
+			allGuesses.push(currentGuess);
 			evaluateGuess();
 		}
 		else {
@@ -48,87 +59,93 @@ function startGame() {
 	}
 }
 
-function getRandomNum() {
-	var randomNum = Math.floor((Math.random() * 100) + 1);
-	return randomNum;
+function updateGuessList() {
+	if (currentGuess == answer) {
+		$(".guess-list").prepend("<li>Guess #" + (5 - guessCount) + ": <span>" + currentGuess + "</span></li>").hide();
+		$(".guess-list li").first().find("span").addClass("correct-guess");
+	}
+	else {
+		$(".guess-list").prepend("<li>Guess #" + (5 - guessCount) + ": <span>" + currentGuess + "</span></li>");
+		$(".guess-list li").first().find("span").addClass("wrong-guess");
+	}
+	$(".guess-list").show();
+	$(".guess-list").find("li").first().hide().slideDown(800);
 }
 
 function evaluateGuess() {
 	if (guessCount == 4) {
-		statusText.innerHTML = howClose() + " " + higherOrLower();
+		$(".current-status").text(howClose() + " — " + higherOrLower());
 	}
 	else {
-		statusText.innerHTML = hotOrCold() + " " + higherOrLower();
+		$(".current-status").text(hotOrCold() + " — " + higherOrLower());
 	}
-	updateGuessList();
+	updateGuessesLeft();
 }
 
 function hotOrCold() {
-	previousGuess = allGuesses[allGuesses.length - 2];
-	var hotCold = "";
-	if (Math.abs(answer - playerGuess) < Math.abs(answer - previousGuess)) {
-		hotCold = "hotter —";
+	var previousGuess = allGuesses[allGuesses.length - 2];
+	if (Math.abs(answer - currentGuess) < Math.abs(answer - previousGuess)) {
+		return "hotter";
 	}
 	else {
-		hotCold = "colder —";
+		return "colder";
 	}
-	return hotCold;
 }
 
-function updateGuessList() {
-	if (guessCount === 0) {
-		guessesLeft.innerHTML = "This is your last guess...";
+function updateGuessesLeft() {
+	if (guessCount === 1) {
+		$(".guesses-left").text("Final guess...");
 	}
 	else {
-		guessesLeft.innerHTML = "Guesses left: " + guessCount;
+		$(".guesses-left").text("Guesses left: " + guessCount);
 	}
 }
 
 function howClose() {
-	var firstHint = "";
-	if (Math.abs(answer - playerGuess) <= 5) {
-		firstHint = "So HOT —";
+	if (Math.abs(answer - currentGuess) <= 5) {
+		return "So HOT";
 	}
-	else if (Math.abs(answer - playerGuess) <= 10) {
-		firstHint = "Pretty hot —";
+	else if (Math.abs(answer - currentGuess) <= 10) {
+		return "Pretty hot";
 	}
-	else if (Math.abs(answer - playerGuess) <= 20) {
-		firstHint = "Cold —";
+	else if (Math.abs(answer - currentGuess) <= 20) {
+		return "Cold";
 	}
-	else if (Math.abs(answer - playerGuess) > 20) {
-		firstHint = "Ice cold —";
+	else if (Math.abs(answer - currentGuess) > 20) {
+		return "Ice cold";
 	}
-	return firstHint;
 }
 
 function higherOrLower() {
-	var highLow = "";
-	if (answer > playerGuess) {
-		highLow += "Guess higher";
+	if (answer > currentGuess) {
+		return "Guess higher";
 	}
 	else {
-		highLow += "Guess lower";
+		return "Guess lower";
 	}
-	return highLow;
+}
+
+function gameWon() {
+	$(".current-status").text("You won!");
 }
 
 function gameLost() {
-	statusText.innerHTML = "Oh no! You lost... :(";
+	$(".current-status").text("Oh no! You lost... :(");
 }
 
 function startOver() {
 	guessCount = 5;
 	allGuesses = [];
-	$("ul").empty();
-	statusText.innerHTML = "It's between 1 and 100";
-	guessesLeft.innerHTML = "Guesses left: " + guessCount;
+	$("ul").empty().hide();
+	$(".current-status").text("It's between 1 and 100");
+	$(".guesses-left").text("Guesses left: " + guessCount);
 }
 
 function giveHint() {
 	if (guessCount == 5) {
-		statusText.innerHTML = "At least try to guess!";
+		$(".current-status").text("At least try to guess!");
 	}
 	else {
-		statusText.innerHTML = "The answer is " + answer;
+		$(".current-status").text("The answer is " + answer);
 	}
 }

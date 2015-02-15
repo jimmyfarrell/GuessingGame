@@ -16,32 +16,28 @@ body {
 
 .guesses-left-box {
 	background-color: #257a7c;
-	border-top-left-radius: 15px;
-	border-top-right-radius: 15px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 	width: 230px;
 	margin-top: 20px;
 }
 
 .status-box {
 	background-color: #257a7c;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 	width: 230px;
-	border-bottom: 3px solid #fff;
+	margin-bottom: 7px;
 }
 
-.guesses-box {
+.all-guesses-box {
 	background-color: #ebe1d1;
-	border-bottom-left-radius: 15px;
-	border-bottom-right-radius: 15px;
+	border-radius: 10px;
 	width: 230px;
-	height: 176px;
 }
 
-#guesses-left {
+.guesses-left {
 	font-size: 20px;
-}
-
-#hint {
-	display: block;
 }
 
 h2 {
@@ -58,13 +54,27 @@ h3 {
 	color: #fff;
 }
 
-ul {
+ul.guess-list {
 	list-style-type: none;
-	margin: 0px;
-	padding-left: 0px;
+	display: none;
+	margin: 0;
+	padding-left: 0;
+	padding-top: 10px;
 }
 
 li {
+	font-size: 18px;
+	line-height: 100%;
+	color: #3a2006;
+	padding-bottom: 11px;
+}
+
+.correct-guess {
+	font-size: 24px;
+	color: #257a7c;
+}
+
+.wrong-guess {
 	font-size: 24px;
 	color: #fb422a;
 }
@@ -74,7 +84,7 @@ li {
 		background-color: #ebe1d1;
 		margin-bottom: 20px;
 	}
-	.status-box {
+	.guesses-box {
 		background-color: #fff;
 	}
 }
@@ -117,7 +127,7 @@ li {
 	padding-left: 0;
 }
 
-textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {   
+textarea:focus, input:focus, input[type]:focus {   
     border-color: #46b2ac;
     box-shadow: 0 1px 1px #46b2ac inset, 0 0 8px #46b2ac;
     outline: 0 none;
@@ -169,7 +179,7 @@ input::-webkit-inner-spin-button {
 	text-transform: lowercase;
 }
 
-.btn-guess {
+.btn-guess, .btn-guess:focus {
 	display: block;
 	width: 130px;
 	height: 60px;
@@ -186,7 +196,13 @@ input::-webkit-inner-spin-button {
 	border: none;
 }
 
-.btn-hint {
+.btn-guess:focus {
+  border-color: none;
+  box-shadow: none;
+  outline: 0 none;
+}
+
+.btn-hint, .btn-hint:focus {
 	background-color: #f2812b;
 	color: #fff;
 	width: 47px;
@@ -199,17 +215,29 @@ input::-webkit-inner-spin-button {
 	border: none;
 }
 
-.btn-tryagain {
+.btn-hint:focus {
+  border-color: none;
+  box-shadow: none;
+  outline: 0 none;
+}
+
+.btn-try-again, .btn-try-again:focus {
 	background-color: #fb422a;
 	color: #fff;
 	width: 78px;
 	border: none;
 }
 
-.btn-tryagain:hover {
+.btn-try-again:hover {
 	background-color: #fa8070;
 	color: #fff;
 	border: none;
+}
+
+.btn-try-again:focus {
+  border-color: none;
+  box-shadow: none;
+  outline: 0 none;
 }
 
 /* Numbertron
