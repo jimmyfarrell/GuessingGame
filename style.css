@@ -22,31 +22,6 @@ h3 {
 	font-size: 14px;
 }
 
-@media (max-width: 767px) {
-	.container {
-		background-color: #ebe1d1;
-		margin-bottom: 20px;
-	}
-	.all-guesses-box {
-		background-color: #fff;
-	}
-}
-
-@media (min-width: 768px) {
-	.container {
-		margin-top: 50px;
-	}
-	.guess-info {
-		margin-top: 10px;
-	}
-}
-
-@media (min-width: 992px) {
-	.guess-info {
-		margin-top: 30px;
-	}
-}
-
 /* Input Guess
 ================================ */
 
@@ -272,5 +247,33 @@ li {
 @media (min-width: 992px) {
 	.numbertron {
 		margin-top: 15px;
+	}
+}
+
+/* Layout (screen sizes)
+================================ */
+
+@media (max-width: 767px) {
+	.container {
+		background-color: #ebe1d1;
+		margin-bottom: 20px;
+	}
+	.all-guesses-box {
+		background-color: #fff;
+	}
+}
+
+@media (min-width: 768px) {
+	.container {
+		margin-top: 50px;
+	}
+	.guess-info {
+		margin-top: 10px;
+	}
+}
+
+@media (min-width: 992px) {
+	.guess-info {
+		margin-top: 30px;
 	}
 }
