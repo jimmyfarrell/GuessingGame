@@ -265,12 +265,20 @@ li {
 	}
 	.all-guesses-box {
 		background-color: #fff;
+		width: 200px;
 	}
 	.guess-output {
 		margin-left: 0;
+		width: 200px;
 	}
 	.guess-input {
 		margin-right: 0;
+	}
+	.guesses-left-box {
+		width: 200px;
+	}
+	.status-box {
+		width: 200px;
 	}
 }
 
