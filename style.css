@@ -8,36 +8,10 @@ body {
 	color: #3a2006;
 }
 
-.container {
+.page-content {
 	max-width: 900px;
 	background-color: #fff;
 	border-radius: 25px;
-}
-
-.guesses-left-box {
-	background-color: #257a7c;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	width: 230px;
-	margin-top: 20px;
-}
-
-.status-box {
-	background-color: #257a7c;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-	width: 230px;
-	margin-bottom: 7px;
-}
-
-.all-guesses-box {
-	background-color: #ebe1d1;
-	border-radius: 10px;
-	width: 230px;
-}
-
-.guesses-left {
-	font-size: 20px;
 }
 
 h2 {
@@ -48,43 +22,12 @@ h3 {
 	font-size: 14px;
 }
 
-h3 {
-	margin: 0px;
-	padding: 5px;
-	color: #fff;
-}
-
-ul.guess-list {
-	list-style-type: none;
-	display: none;
-	margin: 0;
-	padding-left: 0;
-	padding-top: 10px;
-}
-
-li {
-	font-size: 18px;
-	line-height: 100%;
-	color: #3a2006;
-	padding-bottom: 11px;
-}
-
-.correct-guess {
-	font-size: 24px;
-	color: #257a7c;
-}
-
-.wrong-guess {
-	font-size: 24px;
-	color: #fb422a;
-}
-
 @media (max-width: 767px) {
 	.container {
 		background-color: #ebe1d1;
 		margin-bottom: 20px;
 	}
-	.guesses-box {
+	.all-guesses-box {
 		background-color: #fff;
 	}
 }
@@ -100,7 +43,7 @@ li {
 
 @media (min-width: 992px) {
 	.guess-info {
-		margin-top: 10px;
+		margin-top: 30px;
 	}
 }
 
@@ -118,7 +61,7 @@ li {
 	text-align: center;
 	height: 130px;
 	width: 130px;
-	font-size: 80px;
+	font-size: 60px;
 	color: #257a7c;
 }
 
@@ -238,6 +181,72 @@ input::-webkit-inner-spin-button {
   border-color: none;
   box-shadow: none;
   outline: 0 none;
+}
+
+/* Guess Status Area
+================================ */
+
+.guess-output {
+	width: 230px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.guesses-left-box {
+	background-color: #257a7c;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	width: 230px;
+	margin-top: 20px;
+}
+
+.status-box {
+	background-color: #257a7c;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	width: 230px;
+	margin-bottom: 7px;
+}
+
+.all-guesses-box {
+	background-color: #ebe1d1;
+	border-radius: 10px;
+	width: 230px;
+}
+
+.guesses-left {
+	font-size: 20px;
+}
+
+h3.updateText {
+	margin: 0px;
+	padding: 5px;
+	color: #fff;
+}
+
+ul.guess-list {
+	list-style-type: none;
+	display: none;
+	margin: 0;
+	padding-left: 0;
+	padding-top: 10px;
+}
+
+li {
+	font-size: 18px;
+	line-height: 100%;
+	color: #3a2006;
+	padding-bottom: 11px;
+}
+
+.correct-guess {
+	font-size: 24px;
+	color: #257a7c;
+}
+
+.wrong-guess {
+	font-size: 24px;
+	color: #fb422a;
 }
 
 /* Numbertron

@@ -136,6 +136,8 @@ function gameLost() {
 function startOver() {
 	guessCount = 5;
 	allGuesses = [];
+	currentGuess = "";
+	answer = undefined,
 	$("ul").empty().hide();
 	$(".current-status").text("It's between 1 and 100");
 	$(".guesses-left").text("Guesses left: " + guessCount);
