@@ -14,6 +14,11 @@ body {
 	border-radius: 25px;
 }
 
+.interaction-area {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 h2 {
 	font-size: 24px;
 }
@@ -25,7 +30,7 @@ h3 {
 /* Input Guess
 ================================ */
 
-.guess-form {
+.guess-input {
 	width: 130px;
 	display: block;
 	margin: 10px auto;
@@ -254,12 +259,18 @@ li {
 ================================ */
 
 @media (max-width: 767px) {
-	.container {
+	.page-content {
 		background-color: #ebe1d1;
 		margin-bottom: 20px;
 	}
 	.all-guesses-box {
 		background-color: #fff;
+	}
+	.guess-output {
+		margin-left: 0;
+	}
+	.guess-input {
+		margin-right: 0;
 	}
 }
 

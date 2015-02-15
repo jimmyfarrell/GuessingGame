@@ -24,35 +24,33 @@
 					<h1>Hi! My name is Numbertron</h1>
 					<h2>Can you guess what number I'm thinking?</h2>
 					<div class="row">
-						<div class="col-sm-1">
-						</div>
-						<div class="col-sm-4">
-							<div class="guess-form">
-								<div class="input input-lg">
-									<input type="text" class="form-control player-guess" placeholder="?"/>
-								</div>
-								<div class="guess-button">
-									<button class="btn btn-default btn-guess" type="button" onclick="isValidNum()">Guess</button>
-									<button class="btn btn-default btn-hint" type="button" onclick="giveHint()">Hint</button>
-									<button class="btn btn-default btn-try-again" type="button" onclick="startOver()">Try Again</button>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="guess-output">
-								<div class="guesses-left-box">
-									<h3 class="guesses-left updateText">Guesses left: 5</h3>
-								</div>
-								<div class="status-box">
-									<h3 class="current-status updateText">It's between 1 and 100</h3>
-								</div>
-								<div class="all-guesses-box">
-									<ul class="guess-list">
-									</ul>
+						<div class="interaction-area">
+							<div class="col-xs-5 col-sm-4 col-sm-offset-1">
+								<div class="guess-input">
+									<div class="input input-lg">
+										<input type="text" class="form-control player-guess" placeholder="?"/>
+									</div>
+									<div class="guess-button">
+										<button class="btn btn-default btn-guess" type="button" onclick="isValidNum()">Guess</button>
+										<button class="btn btn-default btn-hint" type="button" onclick="giveHint()">Hint</button>
+										<button class="btn btn-default btn-try-again" type="button" onclick="startOver()">Try Again</button>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-sm-1">
+							<div class="col-xs-7 col-sm-6">
+								<div class="guess-output">
+									<div class="guesses-left-box">
+										<h3 class="guesses-left updateText">Guesses left: 5</h3>
+									</div>
+									<div class="status-box">
+										<h3 class="current-status updateText">It's between 1 and 100</h3>
+									</div>
+									<div class="all-guesses-box">
+										<ul class="guess-list">
+										</ul>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
