@@ -27,6 +27,24 @@ h3 {
 	font-size: 14px;
 }
 
+a, a:hover {
+	color: #257a7c;
+}
+
+a:hover {
+	color: #46b2ac;
+	text-decoration: none;
+}
+
+.footer {
+	max-width: 900px;
+	margin-top: 5px;
+}
+
+.creator-info {
+	text-align: right;
+}
+
 /* Input Guess
 ================================ */
 
@@ -264,6 +282,9 @@ li {
 		background-color: #ebe1d1;
 		margin-bottom: 20px;
 	}
+	.creator-info {
+		text-align: center;
+	}
 	.all-guesses-box {
 		background-color: #fff;
 		width: 150px;
@@ -299,7 +320,7 @@ li {
 }
 
 @media (min-width: 768px) {
-	.container {
+	.page-content {
 		margin-top: 50px;
 	}
 	.guess-info {
