@@ -2,19 +2,33 @@ var guessCount = 5;
 var answer;
 var currentGuess;
 var allGuesses = [];
+var gameOver = false;
 
-// $(document).ready(listening());
-//
-//
-// function listening() {
-// 	$(".btn-guess").on("click", isValidNum());
-// 	$(".btn-guess").on("keyup", function(e) {
-// 		if (e.keyup == 13) {
-// 			isValidNum();
-// 		});
-// 	$(".btn-hint").on("click", giveHint());
-// 	$(".btn-try-again").on("click", startOver());
-// }
+$(document).ready(listening());
+
+function listening() {
+	$(".btn-guess").on("click", function() {
+		if (!gameOver) {
+			isValidNum();
+		}
+	});
+	$(".player-guess").on("keypress", function(e) {
+		if (e.which == 13) {
+			if (!gameOver) {
+				isValidNum();
+			}
+			return false;
+		}
+	});
+	$(".btn-hint").on("click", function() {
+		if (!gameOver) {
+			giveHint();
+		}
+	});
+	$(".btn-try-again").on("click", function() {
+		startOver();
+	});
+}
 
 function isValidNum() {
 	var valid = true;
@@ -23,16 +37,16 @@ function isValidNum() {
 	for (var i = 0; i < allGuesses.length; i++) {
 		if (currentGuess == allGuesses[i]) {
 			valid = false;
-			$(".current-status").text("You already guessed that number");
+			$(".current-status").text("You already guessed that number").hide().fadeIn(1000);
 		}
 	}
 	if (isNaN(currentGuess) || currentGuess === "") {
 		valid = false;
-		$(".current-status").text("Not a valid number");
+		$(".current-status").text("Not a valid number").hide().fadeIn(1000);
 	}
 	if (currentGuess < 0 || currentGuess > 100) {
 		valid = false;
-		$(".current-status").text("I told you, 1-100!");
+		$(".current-status").text("I told you, 1-100!").hide().fadeIn(1000);
 	}
 	if (valid) {
 		startGame();
@@ -65,7 +79,7 @@ function updateGuessList() {
 		$(".guess-list li").first().find("span").addClass("correct-guess");
 	}
 	else {
-		$(".guess-list").prepend("<li>Guess #" + (5 - guessCount) + ": <span>" + currentGuess + "</span></li>");
+		$(".guess-list").prepend("<li>Guess #" + (5 - guessCount) + ": <span>" + currentGuess + "</span></li>").hide();
 		$(".guess-list li").first().find("span").addClass("wrong-guess");
 	}
 	$(".guess-list").show();
@@ -74,10 +88,10 @@ function updateGuessList() {
 
 function evaluateGuess() {
 	if (guessCount == 4) {
-		$(".current-status").text(howClose() + " — " + higherOrLower());
+		$(".current-status").text(howClose() + " — " + higherOrLower()).hide().fadeIn(1000);
 	}
 	else {
-		$(".current-status").text(hotOrCold() + " — " + higherOrLower());
+		$(".current-status").text(hotOrCold() + " — " + higherOrLower()).hide().fadeIn(1000);
 	}
 	updateGuessesLeft();
 }
@@ -126,28 +140,31 @@ function higherOrLower() {
 }
 
 function gameWon() {
-	$(".current-status").text("You won!");
+	$(".current-status").text("You won!").hide().fadeIn(1000);
+	gameOver = true;
 }
 
 function gameLost() {
-	$(".current-status").text("Oh no! You lost... :(");
+	$(".current-status").text("Oh no! You lost... :(").hide().fadeIn(1000);
+	gameOver = true;
 }
 
 function startOver() {
 	guessCount = 5;
 	allGuesses = [];
 	currentGuess = "";
-	answer = undefined,
+	answer = undefined;
+	gameOver = false;
 	$("ul").empty().hide();
-	$(".current-status").text("It's between 1 and 100");
+	$(".current-status").text("It's between 1 and 100").hide().fadeIn();
 	$(".guesses-left").text("Guesses left: " + guessCount);
 }
 
 function giveHint() {
 	if (guessCount == 5) {
-		$(".current-status").text("At least try to guess!");
+		$(".current-status").text("At least try to guess!").hide().fadeIn();
 	}
 	else {
-		$(".current-status").text("The answer is " + answer);
+		$(".current-status").text("The answer is " + answer).hide().fadeIn();
 	}
 }
