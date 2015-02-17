@@ -37,7 +37,7 @@ function isValidNum() {
 	for (var i = 0; i < allGuesses.length; i++) {
 		if (currentGuess == allGuesses[i]) {
 			valid = false;
-			$(".current-status").text("You already guessed that number").hide().fadeIn(1000);
+			$(".current-status").text("You already guessed that").hide().fadeIn(1000);
 		}
 	}
 	if (isNaN(currentGuess) || currentGuess === "") {
@@ -46,7 +46,7 @@ function isValidNum() {
 	}
 	if (currentGuess < 0 || currentGuess > 100) {
 		valid = false;
-		$(".current-status").text("I told you, 1-100!").hide().fadeIn(1000);
+		$(".current-status").text("I told you, 1 - 100!").hide().fadeIn(1000);
 	}
 	if (valid) {
 		startGame();
