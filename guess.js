@@ -161,6 +161,7 @@ function higherOrLower() {
 function gameWon() {
 	$("#numbertron").attr("src","contents/numbertron-win.gif");
 	$(".current-status").text("You won!").hide().fadeIn(1000);
+	window.scrollTo(0,0);
 	gameOver = true;
 }
 
