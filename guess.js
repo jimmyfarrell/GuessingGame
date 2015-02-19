@@ -1,7 +1,7 @@
 // Defines global variables
 var guessCount = 5;
 var answer;
-var currentGuess;
+var currentGuess = "";
 var allGuesses = [];
 var gameOver = false;
 
@@ -14,7 +14,7 @@ function listening() {
 		}
 	});
 	$(".player-guess").on("keypress", function(e) {
-		if (e.which == 13) {
+		if (e.which == 13 && $(".player-guess").val() != "") {
 			if (!gameOver) {
 				isValidNum();
 			}
