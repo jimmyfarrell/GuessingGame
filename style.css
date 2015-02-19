@@ -227,7 +227,8 @@ ul.guess-list {
 	list-style-type: none;
 	display: none;
 	margin: 0;
-	padding-left: 0;
+	text-align: left;
+	padding-left: 10px;
 	padding-top: 10px;
 }
 
@@ -251,25 +252,25 @@ li {
 /* Numbertron
 ================================ */
 
-.numbertron {
+#numbertron {
 	display: block;
 	margin: 20px auto;
 }
 
 @media (max-width: 767px) {
-	.numbertron {
+	#numbertron {
 		max-width: 200px;
 	}
 }
 
 @media (min-width: 768px) {
-	.numbertron {
+	#numbertron {
 		margin-top: 40px;;
 	}
 }
 
 @media (min-width: 992px) {
-	.numbertron {
+	#numbertron {
 		margin-top: 15px;
 	}
 }
@@ -315,7 +316,7 @@ li {
 		font-size: 16px;
 	}
 	li {
-		font-size: 13px;
+		font-size: 12px;
 	}
 }
 

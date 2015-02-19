@@ -1,11 +1,12 @@
+// Defines global variables
 var guessCount = 5;
 var answer;
 var currentGuess;
 var allGuesses = [];
 var gameOver = false;
 
+// Listens for button clicks and ENTER key presses
 $(document).ready(listening());
-
 function listening() {
 	$(".btn-guess").on("click", function() {
 		if (!gameOver) {
@@ -30,6 +31,7 @@ function listening() {
 	});
 }
 
+// Checks for valid number 1-100 and starts game if valid
 function isValidNum() {
 	var valid = true;
 	currentGuess = $(".player-guess").val();
@@ -53,59 +55,79 @@ function isValidNum() {
 	}
 }
 
+// Initiates game play
 function startGame() {
+	// Decrements guess counter and adds guess to array
 	guessCount--;
+	allGuesses.push(currentGuess);
+	
+	// Generates random number 1-100 if this is the first guess
 	if (guessCount == 4) {
 		answer = Math.floor((Math.random() * 100) + 1);
 	}
+	
+	// Calls function to update visual list of guesses
 	updateGuessList();
+	
+	// Checks if guess is correct and calls winning function
 	if (currentGuess == answer) {
 		gameWon();
 	}
+	
+	// Checks if incorrect guess is the final guess and updates status and guesses left
 	else {
 		if (guessCount > 0) {
-			allGuesses.push(currentGuess);
-			evaluateGuess();
+			$(".current-status").text(evaluateGuess()).hide().fadeIn(1000);
+			updateGuessesLeft();
 		}
+		
+		// Calls losing function if out of guesses
 		else {
 			gameLost();
 		}
 	}
 }
 
+// Updates visual list of guesses with current guess and guess evaluation
 function updateGuessList() {
 	if (currentGuess == answer) {
-		$(".guess-list").prepend("<li>Guess #" + (5 - guessCount) + ": <span>" + currentGuess + "</span></li>").hide();
+		$(".guess-list").prepend("<li><span>" + currentGuess + "</span>: That's the answer!</li>").hide();
 		$(".guess-list li").first().find("span").addClass("correct-guess");
 	}
 	else {
-		$(".guess-list").prepend("<li>Guess #" + (5 - guessCount) + ": <span>" + currentGuess + "</span></li>").hide();
+		$(".guess-list").prepend("<li><span>" + currentGuess + "</span>: " + evaluateGuess() + "</li>").hide();
 		$(".guess-list li").first().find("span").addClass("wrong-guess");
 	}
 	$(".guess-list").show();
 	$(".guess-list").find("li").first().hide().slideDown(800);
 }
 
+// Evaluates current guess and tells whether to guess higher or lower
 function evaluateGuess() {
+	
+	// If first guess, evaluates based on distance to answer
 	if (guessCount == 4) {
-		$(".current-status").text(howClose() + " — " + higherOrLower()).hide().fadeIn(1000);
+		return howClose() + ", " + higherOrLower();
 	}
+	
+	// If no first guess, evaluates based on whether closer or further away than previous guess
 	else {
-		$(".current-status").text(hotOrCold() + " — " + higherOrLower()).hide().fadeIn(1000);
+		return hotOrCold() + ", " + higherOrLower();
 	}
-	updateGuessesLeft();
 }
 
+// Compares current guess to previos guess to return "hotter" or "colder"
 function hotOrCold() {
 	var previousGuess = allGuesses[allGuesses.length - 2];
 	if (Math.abs(answer - currentGuess) < Math.abs(answer - previousGuess)) {
-		return "hotter";
+		return "Hotter";
 	}
 	else {
-		return "colder";
+		return "Colder";
 	}
 }
 
+// Updates the text that informs player of how many guesses are left
 function updateGuessesLeft() {
 	if (guessCount === 1) {
 		$(".guesses-left").text("Final guess...");
@@ -115,21 +137,17 @@ function updateGuessesLeft() {
 	}
 }
 
+// Judges the distance between the current guess and the answer to return "hot" or "cold"
 function howClose() {
-	if (Math.abs(answer - currentGuess) <= 5) {
-		return "So HOT";
+	if (Math.abs(answer - currentGuess) <= 10) {
+		return "Hot";
 	}
-	else if (Math.abs(answer - currentGuess) <= 10) {
-		return "Pretty hot";
-	}
-	else if (Math.abs(answer - currentGuess) <= 20) {
+	else {
 		return "Cold";
-	}
-	else if (Math.abs(answer - currentGuess) > 20) {
-		return "Ice cold";
 	}
 }
 
+// Compares current guess and answer to return whether to guess higher or lower
 function higherOrLower() {
 	if (answer > currentGuess) {
 		return "Guess higher";
@@ -139,27 +157,35 @@ function higherOrLower() {
 	}
 }
 
+// If the game is won, replaces numbertron image with animation and tells player they won
 function gameWon() {
+	$("#numbertron").attr("src","contents/numbertron-win.gif");
 	$(".current-status").text("You won!").hide().fadeIn(1000);
 	gameOver = true;
 }
 
+// If the game is lost, tells player they lost and provides the answer
 function gameLost() {
-	$(".current-status").text("Oh no! You lost... :(").hide().fadeIn(1000);
+	$(".guesses-left").text("Oh no! You lost... :(");
+	$(".current-status").text("The answer was " + answer).hide().fadeIn(1000);
 	gameOver = true;
 }
 
+// Resets game to original state
 function startOver() {
 	guessCount = 5;
 	allGuesses = [];
 	currentGuess = "";
 	answer = undefined;
 	gameOver = false;
+	$("#numbertron").attr("src","contents/numbertron.png");
 	$("ul").empty().hide();
 	$(".current-status").text("It's between 1 and 100").hide().fadeIn();
 	$(".guesses-left").text("Guesses left: " + guessCount);
+	$(".player-guess").val("");
 }
 
+// Provides the answer
 function giveHint() {
 	if (guessCount == 5) {
 		$(".current-status").text("At least try to guess!").hide().fadeIn();
