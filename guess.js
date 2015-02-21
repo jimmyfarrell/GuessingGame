@@ -46,7 +46,7 @@ function isValidNum() {
 		valid = false;
 		$(".current-status").text("Not a valid number").hide().fadeIn(1000);
 	}
-	if (currentGuess < 0 || currentGuess > 100) {
+	if (currentGuess < 1 || currentGuess > 100) {
 		valid = false;
 		$(".current-status").text("I told you, 1 - 100!").hide().fadeIn(1000);
 	}
